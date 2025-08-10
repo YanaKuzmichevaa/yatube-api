@@ -13,7 +13,7 @@ class Post(models.Model):
         upload_to='posts/', null=True, blank=True)
 
     def __str__(self):
-        return self.text
+        return self.text[:50]
 
 
 class Comment(models.Model):
@@ -24,3 +24,24 @@ class Comment(models.Model):
     text = models.TextField()
     created = models.DateTimeField(
         'Дата добавления', auto_now_add=True, db_index=True)
+
+
+class Group(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=50, unique=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
+class Follow(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='follower'
+    )
+    following = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='following'
+    )
+
+    def __str__(self):
+        return f'{self.user.username} follows {self.following.username}'
