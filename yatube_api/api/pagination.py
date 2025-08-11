@@ -8,11 +8,16 @@ class SmartPagination(BasePagination):
         if 'limit' in request.query_params or 'offset' in request.query_params:
             self.paginator = LimitOffsetPagination()
             return self.paginator.paginate_queryset(queryset, request, view)
-
-        return list(queryset)
+        else:
+            return list(queryset)
 
     def get_paginated_response(self, data):
-        if isinstance(data, dict):
+        if hasattr(self, 'paginator'):
+            return Response({
+                'count': self.paginator.count,
+                'next': self.paginator.get_next_link(),
+                'previous': self.paginator.get_previous_link(),
+                'results': data
+            })
+        else:
             return Response(data)
-
-        return Response(data)

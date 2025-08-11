@@ -5,9 +5,9 @@ import pytest
 
 @pytest.mark.django_db(transaction=True)
 class TestJWT:
-    url_create = '/api/v1/jwt/create/'
-    url_refresh = '/api/v1/jwt/refresh/'
-    url_verify = '/api/v1/jwt/verify/'
+    url_create = '/api/v1/auth/jwt/create/'
+    url_refresh = '/api/v1/auth/jwt/refresh/'
+    url_verify = '/api/v1/auth/jwt/verify/'
 
     def check_request_with_invalid_data(self, client, url, invalid_data,
                                         expected_fields):
