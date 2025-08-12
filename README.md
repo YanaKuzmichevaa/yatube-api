@@ -58,3 +58,16 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+
+### Стек технологий:
+* Python 3.12
+* Django
+* Django Rest Framework
+* Djoser
+* PyJWT
+
+### Спецификация API
+Находится в файле `yatube_api/static/redoc.yaml`
+
+#### Автор проекта
+Проект разработан: Яна (https://github.com/YanaKuzmichevaa)

@@ -28,6 +28,9 @@ class Post(models.Model):
     def __str__(self):
         return self.text[:50]
 
+    class Meta:
+        ordering = ('-pub_date',)
+
 
 class Comment(models.Model):
     author = models.ForeignKey(
@@ -49,3 +52,14 @@ class Follow(models.Model):
 
     def __str__(self):
         return f'{self.user.username} follows {self.following.username}'
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'following'], name='unique_follow'
+            ),
+            models.CheckConstraint(
+                check=~models.Q(user=models.F('following')),
+                name='prevent_self_follow'
+            )
+        ]
