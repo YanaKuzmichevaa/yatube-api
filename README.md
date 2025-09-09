@@ -70,4 +70,4 @@ python manage.py runserver
 Находится в файле `yatube_api/static/redoc.yaml`
 
 #### Автор проекта
-Проект разработан: Яна (https://github.com/YanaKuzmichevaa)
+Проект разработан: [Яна](https://github.com/YanaKuzmichevaa)
